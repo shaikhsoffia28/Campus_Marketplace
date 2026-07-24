@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Marketplace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fa;
+color:#333;
+}
+
+header{
+background:#5961cd;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:white;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+margin:0 18px;
+font-weight:500;
+}
+
+nav a:hover{
+color:#ffd700;
+}
+
+.buttons a{
+text-decoration:none;
+padding:10px 20px;
+margin-left:10px;
+border-radius:30px;
+font-weight:600;
+}
+
+.login{
+background:white;
+color:#845bd0;
+}
+
+.signup{
+background:#ffd700;
+color:#000;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:70px 8%;
+background:linear-gradient(to right,#cd74e1,#864ea8);
+color:white;
+}
+
+.hero-text{
+width:55%;
+}
+
+.hero-text h1{
+font-size:52px;
+margin-bottom:20px;
+}
+
+.hero-text p{
+font-size:18px;
+line-height:1.8;
+margin-bottom:30px;
+}
+
+.hero-text button{
+padding:15px 35px;
+border:none;
+background:#ffd700;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.hero img{
+width:450px;
+}
+
+section{
+padding:70px 10%;
+}
+
+.section-title{
+text-align:center;
+font-size:36px;
+color:#7a54c1;
+margin-bottom:50px;
+}
+
+.about p{
+font-size:18px;
+text-align:center;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{
+margin:20px 0;
+color:#8158ba;
+}
+
+.card p{
+font-size:15px;
+line-height:1.6;
+}
+
+.steps{
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.step{
+width:250px;
+text-align:center;
+margin:20px;
+}
+
+.circle{
+width:80px;
+height:80px;
+background:#9a5dc8;
+color:white;
+font-size:30px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+margin-bottom:20px;
+}
+
+.benefits ul{
+max-width:700px;
+margin:auto;
+font-size:18px;
+line-height:2;
+}
+
+footer{
+background:#0066cc;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+
+@media(max-width:900px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+}
+
+.hero-text{
+width:100%;
+}
+
+.hero img{
+width:300px;
+margin-top:40px;
+}
+
+nav{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+Campus Marketplace
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#features">Features</a>
+<a href="#how">How It Works</a>
+<a href="#benefits">Benefits</a>
+
+</nav>
+
+<div class="buttons">
+
+<a href="login.html" class="login">Sign In</a>
+
+<a href="signup.html" class="signup">Sign Up</a>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Buy • Sell • Exchange Within Your Campus</h1>
+
+<p>
+
+Campus Marketplace is a secure platform where students can buy, sell, and exchange books, electronics, furniture, lab equipment, hostel essentials, and much more. Save money while giving unused items a new home.
+
+</p>
+
+<button onclick="location.href='signup.html'">
+Get Started
+</button>
+
+</div>
+
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+</section>
+
+<section id="about" class="about">
+
+<h2 class="section-title">About Us</h2>
+
+<p>
+
+Campus Marketplace is a student-exclusive marketplace designed to make buying and selling simple, secure, and affordable. Students often have items they no longer use—such as textbooks, calculators, bicycles, electronics, or hostel essentials—while others need these items at reasonable prices.
+
+Our platform connects buyers and sellers within the campus community, creating a trusted environment where students can communicate directly and complete transactions conveniently.
+
+We believe in sustainability, affordability, and helping students make the most of their resources.
+
+</p>
+
+</section>
+
+<section id="features">
+
+<h2 class="section-title">Features</h2>
+
+<div class="features">
+
+<div class="card">
+<h3>Student Verification</h3>
+<p>Only registered students can access the marketplace.</p>
+</div>
+
+<div class="card">
+<h3>Sell Products</h3>
+<p>Upload product images, descriptions, and prices easily.</p>
+</div>
+
+<div class="card">
+<h3>Search Products</h3>
+<p>Browse products by category, keyword, or price.</p>
+</div>
+
+<div class="card">
+<h3>Direct Contact</h3>
+<p>Communicate directly with sellers without intermediaries.</p>
+</div>
+
+<div class="card">
+<h3>Wishlist</h3>
+<p>Save products for future purchase.</p>
+</div>
+
+<div class="card">
+<h3>Easy Management</h3>
+<p>Edit, update, or remove your listings anytime.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="how">
+
+<h2 class="section-title">How It Works</h2>
+
+<div class="steps">
+
+<div class="step">
+
+<div class="circle">1</div>
+
+<h3>Create Account</h3>
+
+<p>Register using your student details.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle">2</div>
+
+<h3>Upload Product</h3>
+
+<p>Add product details, images, and price.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle">3</div>
+
+<h3>Connect</h3>
+
+<p>Buyers contact sellers directly.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle">4</div>
+
+<h3>Complete Deal</h3>
+
+<p>Meet on campus and exchange safely.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="benefits" class="benefits">
+
+<h2 class="section-title">Why Choose Campus Marketplace?</h2>
+
+<ul>
+
+<li>✔ Secure student-only platform</li>
+
+<li>✔ Affordable second-hand products</li>
+<li>✔ Easy buying and selling</li>
+<li>✔ No commission charges</li>
+<li>✔ Eco-friendly and promotes recycling</li>
+<li>✔ Mobile-friendly interface</li>
+<li>✔ Fast product search</li>
+<li>✔ Trusted campus community</li>
+</ul>
+</section>
+<footer>
+<p>
+© 2026 Campus Marketplace | Buy • Sell • Exchange | Made for Students ❤️
+</p>
+</footer>
+</body>
+</html>
