@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sell Product - Campus Marketplace</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        header {
+            background: linear-gradient(90deg, #5961cd, #9a5dc8);
+            color: white;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* MAIN */
+
+        .page {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            color: #6149ae;
+            font-size: 35px;
+        }
+
+        .heading p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        /* FORM CONTAINER */
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e53935;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 13px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #7655c2;
+            box-shadow: 0 0 0 3px rgba(118,85,194,0.1);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .error {
+            color: #e53935;
+            font-size: 11px;
+            margin-top: 5px;
+            min-height: 16px;
+        }
+
+        .hint {
+            color: #888;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* IMAGE PREVIEW */
+
+        .image-upload {
+            border: 2px dashed #b8a6e8;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            background: #faf8ff;
+        }
+
+        .image-upload input {
+            border: none;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        #imagePreview {
+            display: none;
+            width: 220px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 15px auto 0;
+        }
+
+        /* CHECKBOX */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .terms input {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .terms label {
+            font-size: 12px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        /* MESSAGE */
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #5961cd, #9a5dc8);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #eee;
+            color: #555;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(89,97,205,0.3);
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #5961cd;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .form-container {
+                padding: 25px 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Campus Marketplace
+    </div>
+
+    <a href="marketplace.html">
+        ← Back to Marketplace
+    </a>
+
+</header>
+
+
+<main class="page">
+
+
+    <div class="heading">
+
+        <h1>
+            Sell Your Product
+        </h1>
+
+        <p>
+            Give your unused items a new home within your campus.
+        </p>
+
+    </div>
+
+
+    <div class="form-container">
+
+
+        <div id="successMessage"
+             class="message success">
+            Product uploaded successfully!
+        </div>
+
+
+        <form id="sellForm"
+              novalidate>
+
+
+            <div class="form-grid">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Product Image
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            id="productImage"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+                        <p class="hint">
+                            JPG, PNG or WEBP only.
+                            Maximum size: 2 MB.
+                        </p>
+
+                        <img
+                            id="imagePreview"
+                            alt="Product Preview"
+                        >
+
+                    </div>
+
+                    <div class="error"
+                         id="imageError">
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label for="productName">
+                        Product Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        maxlength="80"
+                        placeholder="Example: HP Laptop"
+                    >
+
+                    <div class="error"
+                         id="productNameError">
+                    </div>
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                        <span class="required">*</span>
+                    </label>
+
+                    <select id="category">
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Books">
+                            Books
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Furniture">
+                            Furniture
+                        </option>
+
+                        <option value="Hostel Essentials">
+                            Hostel Essentials
+                        </option>
+
+                        <option value="Lab Equipment">
+                            Lab Equipment
+                        </option>
+
+                        <option value="Clothing">
+                            Clothing
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                    <div class="error"
+                         id="categoryError">
+                    </div>
+
+                </div>
+
+
+                <!-- CONDITION -->
+
+                <div class="form-group">
+
+                    <label for="condition">
+                        Product Condition
+                        <span class="required">*</span>
+                    </label>
+
+                    <select id="condition">
+
+                        <option value="">
+                            Select Condition
+                        </option>
+
+                        <option value="New">
+                            New
+                        </option>
+
+                        <option value="Like New">
+                            Like New
+                        </option>
+
+                        <option value="Good">
+                            Good
+                        </option>
+
+                        <option value="Fair">
+                            Fair
+                        </option>
+
+                    </select>
+
+                    <div class="error"
+                         id="conditionError">
+                    </div>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Selling Price (₹)
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        min="1"
+                        max="1000000"
+                        step="1"
+                        placeholder="Example: 2500"
+                    >
+
+                    <div class="error"
+                         id="priceError">
+                    </div>
+
+                </div>
+
+
+                <!-- OWNER -->
+
+                <div class="form-group">
+
+                    <label for="ownerName">
+                        Owner / Seller Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ownerName"
+                        maxlength="60"
+                        placeholder="Enter your name"
+                    >
+
+                    <div class="error"
+                         id="ownerError">
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="form-group">
+
+                    <label for="contact">
+                        Contact Number
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="contact"
+                        maxlength="10"
+                        placeholder="10-digit mobile number"
+                    >
+
+                    <div class="error"
+                         id="contactError">
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="sellerEmail">
+                        Email Address
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="sellerEmail"
+                        maxlength="100"
+                        placeholder="Your registered email"
+                    >
+
+                    <div class="error"
+                         id="emailError">
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Pickup / Meeting Location
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        maxlength="100"
+                        placeholder="Example: College Library"
+                    >
+
+                    <div class="error"
+                         id="locationError">
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full">
+
+                    <label for="description">
+                        Product Description
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        maxlength="500"
+                        placeholder="Describe the product, its condition, usage, specifications, defects if any, etc."
+                    ></textarea>
+
+                    <div class="hint">
+                        Minimum 20 characters and maximum 500 characters.
+                    </div>
+
+                    <div class="error"
+                         id="descriptionError">
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="form-group full">
+
+                    <div class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="agreement"
+                        >
+
+                        <label for="agreement">
+
+                            I confirm that this product belongs to me,
+                            the information provided is accurate, and
+                            I agree to follow Campus Marketplace rules.
+
+                        </label>
+
+                    </div>
+
+                    <div class="error"
+                         id="agreementError">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="window.location.href='marketplace.html'">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Upload Product
+
+                </button>
+
+            </div>
+<a href="#" class="logout" onclick="logout(); return false;">
+    Logout
+</a>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 Campus Marketplace |
+    Buy • Sell • Exchange |
+    Made for Students ❤️
+
+</footer>
+
+
+<script>
+
+
+    /* AUTHENTICATION */
+
+    if (
+        sessionStorage.getItem("campusLoggedIn")
+        !== "true"
+    ) {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* GET LOGGED-IN USER */
+
+    const loggedUser =
+        JSON.parse(
+            sessionStorage.getItem("loggedInUser")
+        );
+
+
+    /* AUTO-FILL USER DETAILS */
+
+    if (loggedUser) {
+
+        document.getElementById("ownerName")
+            .value =
+            loggedUser.name || "";
+
+        document.getElementById("sellerEmail")
+            .value =
+            loggedUser.email || "";
+
+    }
+
+
+    /* IMAGE PREVIEW */
+
+    document.getElementById("productImage")
+        .addEventListener("change", function() {
+
+            const file = this.files[0];
+
+            const preview =
+                document.getElementById("imagePreview");
+
+            const error =
+                document.getElementById("imageError");
+
+
+            error.textContent = "";
+
+
+            if (!file) {
+
+                preview.style.display = "none";
+
+                return;
+
+            }
+
+
+            const allowedTypes = [
+                "image/jpeg",
+                "image/png",
+                "image/webp"
+            ];
+
+
+            if (!allowedTypes.includes(file.type)) {
+
+                error.textContent =
+                    "Only JPG, PNG and WEBP images are allowed.";
+
+                this.value = "";
+
+                preview.style.display = "none";
+
+                return;
+
+            }
+
+
+            if (file.size > 2 * 1024 * 1024) {
+
+                error.textContent =
+                    "Image size must be less than 2 MB.";
+
+                this.value = "";
+
+                preview.style.display = "none";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload = function(event) {
+
+                preview.src =
+                    event.target.result;
+
+                preview.style.display =
+                    "block";
+
+            };
+
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+    /* FORM SUBMISSION */
+
+    document.getElementById("sellForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            clearErrors();
+
+
+            let valid = true;
+
+
+            const image =
+                document.getElementById("productImage")
+                    .files[0];
+
+            const productName =
+                document.getElementById("productName")
+                    .value.trim();
+
+            const category =
+                document.getElementById("category")
+                    .value;
+
+            const condition =
+                document.getElementById("condition")
+                    .value;
+
+            const price =
+                document.getElementById("price")
+                    .value;
+
+            const ownerName =
+                document.getElementById("ownerName")
+                    .value.trim();
+
+            const contact =
+                document.getElementById("contact")
+                    .value.trim();
+
+            const email =
+                document.getElementById("sellerEmail")
+                    .value.trim()
+                    .toLowerCase();
+
+            const location =
+                document.getElementById("location")
+                    .value.trim();
+
+            const description =
+                document.getElementById("description")
+                    .value.trim();
+
+            const agreement =
+                document.getElementById("agreement")
+                    .checked;
+
+
+            /* IMAGE */
+
+            if (!image) {
+
+                showError(
+                    "imageError",
+                    "Please upload a product image."
+                );
+
+                valid = false;
+
+            } else {
+
+                const allowedTypes = [
+                    "image/jpeg",
+                    "image/png",
+                    "image/webp"
+                ];
+
+                if (!allowedTypes.includes(image.type)) {
+
+                    showError(
+                        "imageError",
+                        "Only JPG, PNG and WEBP images are allowed."
+                    );
+
+                    valid = false;
+
+                } else if (
+                    image.size >
+                    2 * 1024 * 1024
+                ) {
+
+                    showError(
+                        "imageError",
+                        "Image size cannot exceed 2 MB."
+                    );
+
+                    valid = false;
+
+                }
+
+            }
+
+
+            /* PRODUCT NAME */
+
+            if (!productName) {
+
+                showError(
+                    "productNameError",
+                    "Product name is required."
+                );
+
+                valid = false;
+
+            } else if (
+                productName.length < 3
+            ) {
+
+                showError(
+                    "productNameError",
+                    "Product name must contain at least 3 characters."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* CATEGORY */
+
+            if (!category) {
+
+                showError(
+                    "categoryError",
+                    "Please select a category."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* CONDITION */
+
+            if (!condition) {
+
+                showError(
+                    "conditionError",
+                    "Please select product condition."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* PRICE */
+
+            const numericPrice =
+                Number(price);
+
+            if (!price) {
+
+                showError(
+                    "priceError",
+                    "Selling price is required."
+                );
+
+                valid = false;
+
+            } else if (
+                numericPrice <= 0
+            ) {
+
+                showError(
+                    "priceError",
+                    "Price must be greater than ₹0."
+                );
+
+                valid = false;
+
+            } else if (
+                numericPrice > 1000000
+            ) {
+
+                showError(
+                    "priceError",
+                    "Price cannot exceed ₹10,00,000."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* OWNER NAME */
+
+            const nameRegex =
+                /^[A-Za-z ]{2,60}$/;
+
+
+            if (!ownerName) {
+
+                showError(
+                    "ownerError",
+                    "Owner name is required."
+                );
+
+                valid = false;
+
+            } else if (
+                !nameRegex.test(ownerName)
+            ) {
+
+                showError(
+                    "ownerError",
+                    "Name can contain only letters and spaces."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* CONTACT */
+
+            const mobileRegex =
+                /^[6-9][0-9]{9}$/;
+
+
+            if (!contact) {
+
+                showError(
+                    "contactError",
+                    "Contact number is required."
+                );
+
+                valid = false;
+
+            } else if (
+                !mobileRegex.test(contact)
+            ) {
+
+                showError(
+                    "contactError",
+                    "Enter a valid 10-digit Indian mobile number."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* EMAIL */
+
+            const emailRegex =
+                /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+
+            if (!email) {
+
+                showError(
+                    "emailError",
+                    "Email address is required."
+                );
+
+                valid = false;
+
+            } else if (
+                !emailRegex.test(email)
+            ) {
+
+                showError(
+                    "emailError",
+                    "Enter a valid email address."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* LOCATION */
+
+            if (!location) {
+
+                showError(
+                    "locationError",
+                    "Pickup location is required."
+                );
+
+                valid = false;
+
+            } else if (
+                location.length < 3
+            ) {
+
+                showError(
+                    "locationError",
+                    "Enter a valid location."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* DESCRIPTION */
+
+            if (!description) {
+
+                showError(
+                    "descriptionError",
+                    "Product description is required."
+                );
+
+                valid = false;
+
+            } else if (
+                description.length < 20
+            ) {
+
+                showError(
+                    "descriptionError",
+                    "Description must contain at least 20 characters."
+                );
+
+                valid = false;
+
+            }
+
+
+            /* AGREEMENT */
+
+            if (!agreement) {
+
+                showError(
+                    "agreementError",
+                    "Please confirm the product information."
+                );
+
+                valid = false;
+
+            }
+
+
+            if (!valid) {
+
+                window.scrollTo({
+                    top: 200,
+                    behavior: "smooth"
+                });
+
+                return;
+
+            }
+
+
+            /* READ IMAGE */
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload = function(event) {
+
+                const product = {
+
+                    id:
+                        Date.now(),
+
+                    name:
+                        productName,
+
+                    category:
+                        category,
+
+                    condition:
+                        condition,
+
+                    price:
+                        numericPrice,
+
+                    seller:
+                        ownerName,
+
+                    contact:
+                        contact,
+
+                    email:
+                        email,
+
+                    location:
+                        location,
+
+                    description:
+                        description,
+
+                    image:
+                        event.target.result
+
+                };
+
+
+                /* GET OLD PRODUCTS */
+
+                let products =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "campusProducts"
+                        )
+                    ) || [];
+
+
+                /* ADD NEW PRODUCT */
+
+                products.unshift(product);
+
+
+                /* SAVE */
+
+                localStorage.setItem(
+                    "campusProducts",
+                    JSON.stringify(products)
+                );
+
+
+                /* SUCCESS */
+
+                document.getElementById(
+                    "successMessage"
+                ).style.display = "block";
+
+
+                document.getElementById(
+                    "successMessage"
+                ).textContent =
+                    "Product uploaded successfully! Redirecting...";
+
+
+                /* REDIRECT */
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "marketplace.html";
+
+                }, 1500);
+
+            };
+
+
+            reader.readAsDataURL(image);
+
+        });
+
+
+    /* CLEAR ERRORS */
+
+    function clearErrors() {
+
+        document.querySelectorAll(".error")
+            .forEach(function(error) {
+
+                error.textContent = "";
+
+            });
+
+    }
+
+
+    /* SHOW ERROR */
+
+    function showError(id, message) {
+
+        document.getElementById(id)
+            .textContent = message;
+
+    }
+
+    function logout() {
+
+    // Remove login session
+    sessionStorage.removeItem("campusLoggedIn");
+    sessionStorage.removeItem("loggedInUser");
+
+    // Redirect to home page
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+
+</html>
