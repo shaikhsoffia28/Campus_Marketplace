@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Marketplace</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase-config.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333;
+        }
+
+        /* NAVBAR */
+
+        header {
+            background: linear-gradient(90deg, #5961cd, #9a5dc8);
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .user-name {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .logout {
+            background: #ffd700;
+            color: #222 !important;
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #eeeeff, #f8efff);
+            padding: 45px 7%;
+        }
+
+        .hero h1 {
+            color: #6149ae;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .sell-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(90deg, #5961cd, #9a5dc8);
+            color: white;
+            padding: 13px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .sell-btn:hover {
+            box-shadow: 0 7px 18px rgba(89,97,205,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* SEARCH AREA */
+
+        .search-section {
+            padding: 30px 7%;
+        }
+
+        .search-box {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 15px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #7655c2;
+        }
+
+        .clear-btn {
+            border: none;
+            background: #eee;
+            padding: 0 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* PRODUCTS */
+
+        .products-section {
+            padding: 10px 7% 60px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            color: #6149ae;
+            font-size: 27px;
+        }
+
+        #productCount {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-content {
+            padding: 18px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #f0ebff;
+            color: #654bb2;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: 700;
+            color: #684bb5;
+            margin-bottom: 8px;
+        }
+
+        .condition {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .seller {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #684db7;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .view-btn:hover {
+            background: #513b91;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            display: none;
+            text-align: center;
+            padding: 70px 20px;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .empty h3 {
+            color: #6149ae;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #777;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 850px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 25px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .modal-details h2 {
+            color: #6149ae;
+            margin-bottom: 10px;
+        }
+
+        .modal-price {
+            font-size: 27px;
+            font-weight: 700;
+            color: #684bb5;
+            margin: 15px 0;
+        }
+
+        .detail {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .contact-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: #25a244;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #5961cd;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 850px) {
+
+            .search-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a:not(.logout) {
+                display: none;
+            }
+
+        }
+
+        @media(max-width: 550px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .hero,
+            .search-section,
+            .products-section {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- NAVBAR -->
+
+<header>
+
+    <div class="logo">
+        Campus Marketplace
+    </div>
+
+    <nav>
+
+        <a href="marketplace.html">
+            Home
+        </a>
+
+        <a href="sell-product.html">
+            Sell Product
+        </a>
+
+        <span class="user-name"
+              id="userName">
+        </span>
+
+        <a href="#"
+           class="logout"
+           onclick="logout()">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h1>
+        Welcome to Campus Marketplace 👋
+    </h1>
+
+    <p>
+        Buy affordable products from students or sell
+        your unused items within your campus community.
+    </p>
+
+    <a href="sell-product.html"
+       class="sell-btn">
+
+        + Sell Your Product
+
+    </a>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search products..."
+            oninput="filterProducts()"
+        >
+
+        <select
+            id="categoryFilter"
+            onchange="filterProducts()">
+
+            <option value="">
+                All Categories
+            </option>
+
+            <option value="Books">
+                Books
+            </option>
+
+            <option value="Electronics">
+                Electronics
+            </option>
+
+            <option value="Furniture">
+                Furniture
+            </option>
+
+            <option value="Hostel Essentials">
+                Hostel Essentials
+            </option>
+
+            <option value="Lab Equipment">
+                Lab Equipment
+            </option>
+
+            <option value="Clothing">
+                Clothing
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <select
+            id="priceFilter"
+            onchange="filterProducts()">
+
+            <option value="">
+                Any Price
+            </option>
+
+            <option value="500">
+                Under ₹500
+            </option>
+
+            <option value="1000">
+                Under ₹1,000
+            </option>
+
+            <option value="5000">
+                Under ₹5,000
+            </option>
+
+            <option value="10000">
+                Under ₹10,000
+            </option>
+
+        </select>
+
+
+        <button class="clear-btn"
+                onclick="clearFilters()">
+
+            Clear
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="products-section">
+
+    <div class="section-header">
+
+        <h2>
+            Products For You
+        </h2>
+
+        <span id="productCount">
+        </span>
+
+    </div>
+
+
+    <div id="productsGrid"
+         class="products-grid">
+    </div>
+
+
+    <div id="emptyState"
+         class="empty">
+
+        <h3>
+            No products found
+        </h3>
+
+        <p>
+            Try another search or be the first student
+            to sell a product.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCT DETAILS MODAL -->
+
+<div class="modal"
+     id="productModal"
+     onclick="closeModal(event)">
+
+    <div class="modal-content"
+         onclick="event.stopPropagation()">
+
+        <span class="close"
+              onclick="closeProductModal()">
+            ×
+        </span>
+
+        <div class="modal-grid">
+
+            <div>
+
+                <img
+                    id="modalImage"
+                    class="modal-image"
+                    src=""
+                    alt="Product"
+                >
+
+            </div>
+
+            <div class="modal-details">
+
+                <span class="category"
+                      id="modalCategory">
+                </span>
+
+                <h2 id="modalName">
+                </h2>
+
+                <div class="modal-price"
+                     id="modalPrice">
+                </div>
+
+                <div class="detail">
+                    <strong>Condition:</strong>
+                    <span id="modalCondition"></span>
+                </div>
+
+                <div class="detail">
+                    <strong>Description:</strong>
+                    <p id="modalDescription"></p>
+                </div>
+
+                <div class="detail">
+                    <strong>Seller:</strong>
+                    <span id="modalSeller"></span>
+                </div>
+
+                <div class="detail">
+                    <strong>Contact:</strong>
+                    <span id="modalContact"></span>
+                </div>
+
+                <div class="detail">
+                    <strong>Location:</strong>
+                    <span id="modalLocation"></span>
+                </div>
+
+                <button class="contact-btn"
+                        onclick="contactSeller()">
+
+                    Contact Seller
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 Campus Marketplace |
+    Buy • Sell • Exchange |
+    Made for Students ❤️
+
+</footer>
+
+
+<script>
+
+    /* AUTHENTICATION CHECK */
+
+    const loggedIn =
+        sessionStorage.getItem("campusLoggedIn");
+
+    if (loggedIn !== "true") {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* GET LOGGED USER */
+
+    const loggedUser =
+        JSON.parse(
+            sessionStorage.getItem("loggedInUser")
+        );
+
+
+    if (loggedUser) {
+
+        document.getElementById("userName")
+            .textContent =
+            "Hi, " + loggedUser.name;
+
+    }
+
+
+    /* DEFAULT PRODUCTS */
+
+    const defaultProducts = [
+
+        {
+            id: 1,
+            name: "Engineering Mathematics Book",
+            category: "Books",
+            price: 350,
+            condition: "Good",
+            description:
+                "Useful reference book for mathematics students. Good condition with minimal markings.",
+            seller: "Rahul Sharma",
+            contact: "9876543210",
+            location: "College Library",
+            image:
+                "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 2,
+            name: "Wireless Headphones",
+            category: "Electronics",
+            price: 1200,
+            condition: "Like New",
+            description:
+                "Wireless headphones with excellent sound quality. Used only for a few months.",
+            seller: "Aman Khan",
+            contact: "9876501234",
+            location: "College Campus",
+            image:
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 3,
+            name: "Study Table",
+            category: "Furniture",
+            price: 1800,
+            condition: "Good",
+            description:
+                "Compact wooden study table suitable for hostel rooms.",
+            seller: "Priya Patil",
+            contact: "9823456789",
+            location: "Girls Hostel",
+            image:
+                "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 4,
+            name: "Scientific Calculator",
+            category: "Lab Equipment",
+            price: 650,
+            condition: "Good",
+            description:
+                "Scientific calculator suitable for engineering and computer science students.",
+            seller: "Neha Shaikh",
+            contact: "9812345678",
+            location: "Main Campus",
+            image:
+                "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=800&q=80"
+        }
+
+    ];
+
+
+    /* LOAD PRODUCTS */
+
+    function getProducts() {
+
+        const savedProducts =
+            JSON.parse(
+                localStorage.getItem("campusProducts")
+            );
+
+
+        if (!savedProducts) {
+
+            localStorage.setItem(
+                "campusProducts",
+                JSON.stringify(defaultProducts)
+            );
+
+            return defaultProducts;
+
+        }
+
+        return savedProducts;
+
+    }
+
+
+    let products = getProducts();
+
+
+    /* DISPLAY PRODUCTS */
+
+    function displayProducts(productList) {
+
+        const grid =
+            document.getElementById("productsGrid");
+
+        const empty =
+            document.getElementById("emptyState");
+
+        const count =
+            document.getElementById("productCount");
+
+
+        grid.innerHTML = "";
+
+
+        count.textContent =
+            productList.length +
+            " product(s) available";
+
+
+        if (productList.length === 0) {
+
+            empty.style.display = "block";
+
+            return;
+
+        }
+
+
+        empty.style.display = "none";
+
+
+        productList.forEach(function(product) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "product-card";
+
+
+            card.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                    class="product-image"
+                    alt="${escapeHTML(product.name)}"
+                    onerror="this.src='https://via.placeholder.com/600x400?text=Product'"
+                >
+
+                <div class="product-content">
+
+                    <span class="category">
+                        ${escapeHTML(product.category)}
+                    </span>
+
+                    <div class="product-name">
+                        ${escapeHTML(product.name)}
+                    </div>
+
+                    <div class="price">
+                        ₹${Number(product.price).toLocaleString("en-IN")}
+                    </div>
+
+                    <div class="condition">
+                        Condition: ${escapeHTML(product.condition)}
+                    </div>
+
+                    <div class="seller">
+                        Seller: ${escapeHTML(product.seller)}
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewProduct(${product.id})">
+
+                        View Details
+
+                    </button>
+
+                </div>
+            `;
+
+
+            grid.appendChild(card);
+
+        });
+
+    }
+
+
+    /* SEARCH + FILTER */
+
+    function filterProducts() {
+
+        const search =
+            document.getElementById("search")
+                .value
+                .toLowerCase()
+                .trim();
+
+        const category =
+            document.getElementById("categoryFilter")
+                .value;
+
+        const maxPrice =
+            document.getElementById("priceFilter")
+                .value;
+
+
+        const filtered =
+            products.filter(function(product) {
+
+                const matchesSearch =
+                    product.name
+                        .toLowerCase()
+                        .includes(search) ||
+
+                    product.description
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesCategory =
+                    !category ||
+                    product.category === category;
+
+
+                const matchesPrice =
+                    !maxPrice ||
+                    Number(product.price) <=
+                    Number(maxPrice);
+
+
+                return matchesSearch &&
+                       matchesCategory &&
+                       matchesPrice;
+
+            });
+
+
+        displayProducts(filtered);
+
+    }
+
+
+    /* VIEW PRODUCT */
+
+    function viewProduct(id) {
+
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        document.getElementById("modalImage")
+            .src = product.image;
+
+        document.getElementById("modalName")
+            .textContent = product.name;
+
+        document.getElementById("modalCategory")
+            .textContent = product.category;
+
+        document.getElementById("modalPrice")
+            .textContent =
+            "₹" +
+            Number(product.price)
+                .toLocaleString("en-IN");
+
+        document.getElementById("modalCondition")
+            .textContent = product.condition;
+
+        document.getElementById("modalDescription")
+            .textContent = product.description;
+
+        document.getElementById("modalSeller")
+            .textContent = product.seller;
+
+        document.getElementById("modalContact")
+            .textContent = product.contact;
+
+        document.getElementById("modalLocation")
+            .textContent = product.location;
+
+
+        document.getElementById("productModal")
+            .style.display = "flex";
+
+
+        window.currentProduct =
+            product;
+
+    }
+
+
+    /* CONTACT SELLER */
+
+    function contactSeller() {
+
+        if (!window.currentProduct) {
+            return;
+        }
+
+
+        const phone =
+            window.currentProduct.contact;
+
+
+        window.location.href =
+            "tel:" + phone;
+
+    }
+
+
+    /* CLOSE MODAL */
+
+    function closeProductModal() {
+
+        document.getElementById("productModal")
+            .style.display = "none";
+
+    }
+
+
+    function closeModal(event) {
+
+        if (
+            event.target.id ===
+            "productModal"
+        ) {
+
+            closeProductModal();
+
+        }
+
+    }
+
+
+    /* CLEAR FILTER */
+
+    function clearFilters() {
+
+        document.getElementById("search")
+            .value = "";
+
+        document.getElementById("categoryFilter")
+            .value = "";
+
+        document.getElementById("priceFilter")
+            .value = "";
+
+
+        displayProducts(products);
+
+    }
+
+
+    /* LOGOUT */
+
+    function logout() {
+
+        sessionStorage.removeItem(
+            "campusLoggedIn"
+        );
+
+        sessionStorage.removeItem(
+            "loggedInUser"
+        );
+
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    /* SECURITY FOR PRODUCT TEXT */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* INITIAL LOAD */
+
+    displayProducts(products);
+
+</script>
+
+</body>
+
+</html>

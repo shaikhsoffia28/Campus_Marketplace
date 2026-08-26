@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <title>Sign Up - Campus Marketplace</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <style>
         * {
@@ -33,7 +34,7 @@
             background: white;
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
         .left-section {
@@ -122,7 +123,7 @@
         input:focus,
         select:focus {
             border-color: #7956c5;
-            box-shadow: 0 0 0 3px rgba(121,86,197,0.1);
+            box-shadow: 0 0 0 3px rgba(121, 86, 197, 0.1);
         }
 
         .error {
@@ -156,12 +157,6 @@
             color: #555;
         }
 
-        .terms a {
-            color: #6d4db7;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
         button {
             width: 100%;
             padding: 14px;
@@ -177,7 +172,14 @@
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(89,97,205,0.3);
+            box-shadow: 0 8px 20px rgba(89, 97, 205, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .login-link {
@@ -197,6 +199,17 @@
             display: none;
             background: #e8f5e9;
             color: #2e7d32;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .general-error {
+            display: none;
+            background: #ffebee;
+            color: #c62828;
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -242,527 +255,806 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- LEFT SIDE -->
-    <div class="left-section">
+        <!-- LEFT SIDE -->
+        <div class="left-section">
 
-        <div class="logo">
-            Campus Marketplace
-        </div>
-
-        <h1>
-            Join Your Campus Marketplace
-        </h1>
-
-        <p>
-            Create your student account and start buying, selling
-            and exchanging products within your campus community.
-        </p>
-
-        <div class="benefits">
-            <p>✔ Student-only marketplace</p>
-            <p>✔ Buy and sell affordable products</p>
-            <p>✔ Secure student community</p>
-            <p>✔ No commission charges</p>
-            <p>✔ Easy product management</p>
-        </div>
-
-    </div>
-
-
-    <!-- RIGHT SIDE -->
-    <div class="right-section">
-
-        <h2 class="form-title">Create Account</h2>
-
-        <p class="subtitle">
-            Register with your student details to continue.
-        </p>
-
-        <div id="successMessage" class="success-message">
-            Account created successfully!
-        </div>
-
-        <form id="signupForm" novalidate>
-
-            <!-- NAME -->
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label for="firstName">
-                        First Name *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="firstName"
-                        placeholder="Enter first name"
-                        maxlength="30"
-                    >
-
-                    <div class="error" id="firstNameError"></div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="lastName">
-                        Last Name *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="lastName"
-                        placeholder="Enter last name"
-                        maxlength="30"
-                    >
-
-                    <div class="error" id="lastNameError"></div>
-
-                </div>
-
+            <div class="logo">
+                Campus Marketplace
             </div>
 
+            <h1>
+                Join Your Campus Marketplace
+            </h1>
 
-            <!-- EMAIL + MOBILE -->
-            <div class="form-row">
+            <p>
+                Create your student account and start buying, selling
+                and exchanging products within your campus community.
+            </p>
 
-                <div class="form-group">
-
-                    <label for="email">
-                        Email Address *
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="example@email.com"
-                        maxlength="100"
-                    >
-
-                    <div class="error" id="emailError"></div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="mobile">
-                        Mobile Number *
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="mobile"
-                        placeholder="10-digit mobile number"
-                        maxlength="10"
-                    >
-
-                    <div class="error" id="mobileError"></div>
-
-                </div>
-
+            <div class="benefits">
+                <p>✔ Student-only marketplace</p>
+                <p>✔ Buy and sell affordable products</p>
+                <p>✔ Secure student community</p>
+                <p>✔ No commission charges</p>
+                <p>✔ Easy product management</p>
             </div>
 
-
-            <!-- STUDENT ID + COURSE -->
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label for="studentId">
-                        Student ID / Roll No. *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="studentId"
-                        placeholder="Enter student ID"
-                        maxlength="20"
-                    >
-
-                    <div class="error" id="studentIdError"></div>
-
-                </div>
+        </div>
 
 
-                <div class="form-group">
+        <!-- RIGHT SIDE -->
+        <div class="right-section">
 
-                    <label for="course">
-                        Course *
-                    </label>
+            <h2 class="form-title">
+                Create Account
+            </h2>
 
-                    <select id="course">
+            <p class="subtitle">
+                Register with your student details to continue.
+            </p>
 
-                        <option value="">
-                            Select Course
-                        </option>
-
-                        <option value="MSc Computer Applications">
-                            M.Sc. Computer Applications
-                        </option>
-
-                        <option value="MCA">
-                            MCA
-                        </option>
-
-                        <option value="BCA">
-                            BCA
-                        </option>
-
-                        <option value="BSc Computer Science">
-                            B.Sc. Computer Science
-                        </option>
-
-                        <option value="Other">
-                            Other
-                        </option>
-
-                    </select>
-
-                    <div class="error" id="courseError"></div>
-
-                </div>
-
+            <!-- SUCCESS MESSAGE -->
+            <div id="successMessage" class="success-message">
+                Account created successfully!
             </div>
 
+            <!-- GENERAL ERROR -->
+            <div id="generalError" class="general-error"></div>
 
-            <!-- PASSWORD -->
-            <div class="form-row">
 
-                <div class="form-group">
+            <form id="signupForm" novalidate>
 
-                    <label for="password">
-                        Password *
-                    </label>
+                <!-- NAME -->
+                <div class="form-row">
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Create password"
-                        maxlength="30"
-                    >
+                    <div class="form-group">
 
-                    <div class="password-info">
-                        Minimum 8 characters, including uppercase,
-                        lowercase, number and special character.
+                        <label for="firstName">
+                            First Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            placeholder="Enter first name"
+                            maxlength="30"
+                        >
+
+                        <div class="error" id="firstNameError"></div>
+
                     </div>
 
-                    <div class="error" id="passwordError"></div>
+
+                    <div class="form-group">
+
+                        <label for="lastName">
+                            Last Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            placeholder="Enter last name"
+                            maxlength="30"
+                        >
+
+                        <div class="error" id="lastNameError"></div>
+
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
+                <!-- EMAIL + MOBILE -->
+                <div class="form-row">
 
-                    <label for="confirmPassword">
-                        Confirm Password *
-                    </label>
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address *
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="example@email.com"
+                            maxlength="100"
+                        >
+
+                        <div class="error" id="emailError"></div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mobile">
+                            Mobile Number *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            placeholder="10-digit mobile number"
+                            maxlength="10"
+                        >
+
+                        <div class="error" id="mobileError"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDENT ID + COURSE -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="studentId">
+                            Student ID / Roll No. *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="Enter student ID"
+                            maxlength="20"
+                        >
+
+                        <div class="error" id="studentIdError"></div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="course">
+                            Course *
+                        </label>
+
+                        <select id="course">
+
+                            <option value="">
+                                Select Course
+                            </option>
+
+                            <option value="MSc Computer Applications">
+                                M.Sc. Computer Applications
+                            </option>
+
+                            <option value="MCA">
+                                MCA
+                            </option>
+
+                            <option value="BCA">
+                                BCA
+                            </option>
+
+                            <option value="BSc Computer Science">
+                                B.Sc. Computer Science
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <div class="error" id="courseError"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password *
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create password"
+                            maxlength="30"
+                        >
+
+                        <div class="password-info">
+                            Minimum 8 characters, including uppercase,
+                            lowercase, number and special character.
+                        </div>
+
+                        <div class="error" id="passwordError"></div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password *
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            maxlength="30"
+                        >
+
+                        <div class="error" id="confirmPasswordError"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+                <div class="terms">
 
                     <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Confirm password"
-                        maxlength="30"
+                        type="checkbox"
+                        id="terms"
                     >
 
-                    <div class="error" id="confirmPasswordError"></div>
+                    <label for="terms">
+                        I agree to the Campus Marketplace terms and
+                        confirm that the information provided is correct.
+                    </label>
 
                 </div>
 
+                <div class="error" id="termsError"></div>
+
+
+                <button type="submit" id="signupButton">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div class="login-link">
+                Already have an account?
+                <a href="login.html">
+                    Sign In
+                </a>
             </div>
 
-
-            <!-- TERMS -->
-            <div class="terms">
-
-                <input type="checkbox" id="terms">
-
-                <label for="terms">
-                    I agree to the Campus Marketplace terms and
-                    confirm that the information provided is correct.
-                </label>
-
-            </div>
-
-            <div class="error" id="termsError"></div>
-
-
-            <button type="submit">
-                Create Account
-            </button>
-
-        </form>
-
-
-        <div class="login-link">
-            Already have an account?
-            <a href="login.html">Sign In</a>
         </div>
 
     </div>
 
-</div>
 
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- YOUR SUPABASE CONFIG -->
+    <script src="js/supabase-config.js"></script>
 <script>
-
-    const signupForm = document.getElementById("signupForm");
-
-    signupForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        // Clear previous errors
-        document.querySelectorAll(".error").forEach(function(error) {
-            error.textContent = "";
-        });
-
-        let isValid = true;
-
-        // Get values
-        const firstName =
-            document.getElementById("firstName").value.trim();
-
-        const lastName =
-            document.getElementById("lastName").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim().toLowerCase();
-
-        const mobile =
-            document.getElementById("mobile").value.trim();
-
-        const studentId =
-            document.getElementById("studentId").value.trim();
-
-        const course =
-            document.getElementById("course").value;
-
-        const password =
-            document.getElementById("password").value;
-
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
-
-        const terms =
-            document.getElementById("terms").checked;
-
-
-        // Name validation
-        const nameRegex = /^[A-Za-z ]{2,30}$/;
-
-        if (!firstName) {
-
-            document.getElementById("firstNameError").textContent =
-                "First name is required.";
-
-            isValid = false;
-
-        } else if (!nameRegex.test(firstName)) {
-
-            document.getElementById("firstNameError").textContent =
-                "Only letters are allowed.";
-
-            isValid = false;
-        }
-
-
-        if (!lastName) {
-
-            document.getElementById("lastNameError").textContent =
-                "Last name is required.";
-
-            isValid = false;
-
-        } else if (!nameRegex.test(lastName)) {
-
-            document.getElementById("lastNameError").textContent =
-                "Only letters are allowed.";
-
-            isValid = false;
-        }
-
-
-        // Email validation
-        const emailRegex =
-            /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-        if (!email) {
-
-            document.getElementById("emailError").textContent =
-                "Email address is required.";
-
-            isValid = false;
-
-        } else if (!emailRegex.test(email)) {
-
-            document.getElementById("emailError").textContent =
-                "Enter a valid email address.";
-
-            isValid = false;
-        }
-
-
-        // Mobile validation
-        const mobileRegex = /^[6-9][0-9]{9}$/;
-
-        if (!mobile) {
-
-            document.getElementById("mobileError").textContent =
-                "Mobile number is required.";
-
-            isValid = false;
-
-        } else if (!mobileRegex.test(mobile)) {
-
-            document.getElementById("mobileError").textContent =
-                "Enter a valid 10-digit Indian mobile number.";
-
-            isValid = false;
-        }
-
-
-        // Student ID validation
-        const studentIdRegex =
-            /^[A-Za-z0-9-]{3,20}$/;
-
-        if (!studentId) {
-
-            document.getElementById("studentIdError").textContent =
-                "Student ID is required.";
-
-            isValid = false;
-
-        } else if (!studentIdRegex.test(studentId)) {
-
-            document.getElementById("studentIdError").textContent =
-                "Use only letters, numbers and hyphen.";
-
-            isValid = false;
-        }
-
-
-        // Course validation
-        if (!course) {
-
-            document.getElementById("courseError").textContent =
-                "Please select your course.";
-
-            isValid = false;
-        }
-
-
-        // Password validation
-        const passwordRegex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
-
-        if (!password) {
-
-            document.getElementById("passwordError").textContent =
-                "Password is required.";
-
-            isValid = false;
-
-        } else if (!passwordRegex.test(password)) {
-
-            document.getElementById("passwordError").textContent =
-                "Password does not meet the required criteria.";
-
-            isValid = false;
-        }
-
-
-        // Confirm password
-        if (!confirmPassword) {
-
-            document.getElementById("confirmPasswordError").textContent =
-                "Please confirm your password.";
-
-            isValid = false;
-
-        } else if (password !== confirmPassword) {
-
-            document.getElementById("confirmPasswordError").textContent =
-                "Passwords do not match.";
-
-            isValid = false;
-        }
-
-
-        // Terms
-        if (!terms) {
-
-            document.getElementById("termsError").textContent =
-                "You must accept the terms.";
-
-            isValid = false;
-        }
-
-
-        // Check existing account
-        const existingUser =
-            JSON.parse(localStorage.getItem("campusUser"));
-
-        if (existingUser &&
-            existingUser.email === email) {
-
-            document.getElementById("emailError").textContent =
-                "An account with this email already exists. Please sign in.";
-
-            isValid = false;
-        }
-
-
-        if (!isValid) {
-            return;
-        }
-
-
-        // Create user object
-        const user = {
-
-            firstName: firstName,
-
-            lastName: lastName,
-
-            email: email,
-
-            mobile: mobile,
-
-            studentId: studentId,
-
-            course: course,
-
-            password: password
-        };
-
-
-        // Store user
-        localStorage.setItem(
-            "campusUser",
-            JSON.stringify(user)
-        );
-
-
-        // Show success
-        document.getElementById("successMessage").style.display =
-            "block";
-
-
-        // Redirect to login
-        setTimeout(function() {
-
-            window.location.href = "login.html";
-
-        }, 1500);
-
-    });
-
+    console.log("Supabase library:", window.supabase);
+    console.log("Supabase client:", supabaseClient);
 </script>
 
+    <script>
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        const signupButton =
+            document.getElementById("signupButton");
+
+
+        signupForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                // =========================================
+                // CLEAR OLD ERRORS
+                // =========================================
+
+                document
+                    .querySelectorAll(".error")
+                    .forEach(function (error) {
+                        error.textContent = "";
+                    });
+
+
+                document.getElementById(
+                    "generalError"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "successMessage"
+                ).style.display = "none";
+
+
+                let isValid = true;
+
+
+                // =========================================
+                // GET VALUES
+                // =========================================
+
+                const firstName =
+                    document.getElementById("firstName")
+                        .value
+                        .trim();
+
+
+                const lastName =
+                    document.getElementById("lastName")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document.getElementById("email")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const mobile =
+                    document.getElementById("mobile")
+                        .value
+                        .trim();
+
+
+                const studentId =
+                    document.getElementById("studentId")
+                        .value
+                        .trim();
+
+
+                const course =
+                    document.getElementById("course")
+                        .value;
+
+
+                const password =
+                    document.getElementById("password")
+                        .value;
+
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword")
+                        .value;
+
+
+                const terms =
+                    document.getElementById("terms")
+                        .checked;
+
+
+                // =========================================
+                // NAME VALIDATION
+                // =========================================
+
+                const nameRegex =
+                    /^[A-Za-z ]{2,30}$/;
+
+
+                if (!firstName) {
+
+                    document.getElementById(
+                        "firstNameError"
+                    ).textContent =
+                        "First name is required.";
+
+                    isValid = false;
+
+                } else if (!nameRegex.test(firstName)) {
+
+                    document.getElementById(
+                        "firstNameError"
+                    ).textContent =
+                        "Only letters are allowed.";
+
+                    isValid = false;
+                }
+
+
+                if (!lastName) {
+
+                    document.getElementById(
+                        "lastNameError"
+                    ).textContent =
+                        "Last name is required.";
+
+                    isValid = false;
+
+                } else if (!nameRegex.test(lastName)) {
+
+                    document.getElementById(
+                        "lastNameError"
+                    ).textContent =
+                        "Only letters are allowed.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // EMAIL VALIDATION
+                // =========================================
+
+                const emailRegex =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+
+                if (!email) {
+
+                    document.getElementById(
+                        "emailError"
+                    ).textContent =
+                        "Email address is required.";
+
+                    isValid = false;
+
+                } else if (!emailRegex.test(email)) {
+
+                    document.getElementById(
+                        "emailError"
+                    ).textContent =
+                        "Enter a valid email address.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // MOBILE VALIDATION
+                // =========================================
+
+                const mobileRegex =
+                    /^[6-9][0-9]{9}$/;
+
+
+                if (!mobile) {
+
+                    document.getElementById(
+                        "mobileError"
+                    ).textContent =
+                        "Mobile number is required.";
+
+                    isValid = false;
+
+                } else if (!mobileRegex.test(mobile)) {
+
+                    document.getElementById(
+                        "mobileError"
+                    ).textContent =
+                        "Enter a valid 10-digit Indian mobile number.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // STUDENT ID VALIDATION
+                // =========================================
+
+                const studentIdRegex =
+                    /^[A-Za-z0-9-]{3,20}$/;
+
+
+                if (!studentId) {
+
+                    document.getElementById(
+                        "studentIdError"
+                    ).textContent =
+                        "Student ID is required.";
+
+                    isValid = false;
+
+                } else if (!studentIdRegex.test(studentId)) {
+
+                    document.getElementById(
+                        "studentIdError"
+                    ).textContent =
+                        "Use only letters, numbers and hyphen.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // COURSE VALIDATION
+                // =========================================
+
+                if (!course) {
+
+                    document.getElementById(
+                        "courseError"
+                    ).textContent =
+                        "Please select your course.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // PASSWORD VALIDATION
+                // =========================================
+
+                const passwordRegex =
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
+
+
+                if (!password) {
+
+                    document.getElementById(
+                        "passwordError"
+                    ).textContent =
+                        "Password is required.";
+
+                    isValid = false;
+
+                } else if (!passwordRegex.test(password)) {
+
+                    document.getElementById(
+                        "passwordError"
+                    ).textContent =
+                        "Password does not meet the required criteria.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // CONFIRM PASSWORD
+                // =========================================
+
+                if (!confirmPassword) {
+
+                    document.getElementById(
+                        "confirmPasswordError"
+                    ).textContent =
+                        "Please confirm your password.";
+
+                    isValid = false;
+
+                } else if (password !== confirmPassword) {
+
+                    document.getElementById(
+                        "confirmPasswordError"
+                    ).textContent =
+                        "Passwords do not match.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // TERMS
+                // =========================================
+
+                if (!terms) {
+
+                    document.getElementById(
+                        "termsError"
+                    ).textContent =
+                        "You must accept the terms.";
+
+                    isValid = false;
+                }
+
+
+                // =========================================
+                // STOP IF VALIDATION FAILS
+                // =========================================
+
+                if (!isValid) {
+                    return;
+                }
+
+
+                // =========================================
+                // CHECK SUPABASE CONNECTION
+                // =========================================
+
+                if (!supabaseClient) {
+
+                    const errorBox =
+                        document.getElementById(
+                            "generalError"
+                        );
+
+                    errorBox.textContent =
+                        "Supabase is not connected. Check js/supabase-config.js.";
+
+                    errorBox.style.display =
+                        "block";
+
+                    return;
+                }
+
+
+                // =========================================
+                // DISABLE BUTTON
+                // =========================================
+
+                signupButton.disabled = true;
+
+                signupButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    // =====================================
+                    // CREATE SUPABASE AUTH ACCOUNT
+                    // =====================================
+
+                    const { data, error } =
+                        await supabaseClient.auth.signUp({
+
+                            email: email,
+
+                            password: password,
+
+                            options: {
+
+                                data: {
+
+                                    first_name:
+                                        firstName,
+
+                                    last_name:
+                                        lastName,
+
+                                    mobile:
+                                        mobile,
+
+                                    student_id:
+                                        studentId,
+
+                                    course:
+                                        course
+                                }
+                            }
+                        });
+
+
+                    // =====================================
+                    // HANDLE SIGNUP ERROR
+                    // =====================================
+
+                    if (error) {
+
+                        console.error(
+                            "Supabase signup error:",
+                            error
+                        );
+
+                        const errorBox =
+                            document.getElementById(
+                                "generalError"
+                            );
+
+                        errorBox.textContent =
+                            error.message;
+
+                        errorBox.style.display =
+                            "block";
+
+                        signupButton.disabled =
+                            false;
+
+                        signupButton.textContent =
+                            "Create Account";
+
+                        return;
+                    }
+
+
+                    // =====================================
+                    // CHECK USER
+                    // =====================================
+
+                    if (!data || !data.user) {
+
+                        const errorBox =
+                            document.getElementById(
+                                "generalError"
+                            );
+
+                        errorBox.textContent =
+                            "Account could not be created.";
+
+                        errorBox.style.display =
+                            "block";
+
+                        signupButton.disabled =
+                            false;
+
+                        signupButton.textContent =
+                            "Create Account";
+
+                        return;
+                    }
+
+
+                    // =====================================
+                    // SUCCESS
+                    // =====================================
+
+                    const successMessage =
+                        document.getElementById(
+                            "successMessage"
+                        );
+
+
+                    successMessage.textContent =
+                        "Account created successfully! Please check your email.";
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    signupButton.disabled =
+                        true;
+
+
+                    // =====================================
+                    // REDIRECT
+                    // =====================================
+
+                    setTimeout(function () {
+
+                        window.location.href =
+                            "login.html";
+
+                    }, 2500);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Unexpected signup error:",
+                        error
+                    );
+
+
+                    const errorBox =
+                        document.getElementById(
+                            "generalError"
+                        );
+
+
+                    errorBox.textContent =
+                        error.message ||
+                        "Something went wrong. Please try again.";
+
+
+                    errorBox.style.display =
+                        "block";
+
+
+                    signupButton.disabled =
+                        false;
+
+
+                    signupButton.textContent =
+                        "Create Account";
+                }
+
+            });
+
+    </script>
+
 </body>
+
 </html>

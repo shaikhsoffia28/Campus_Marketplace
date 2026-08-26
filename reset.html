@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Reset Password - Campus Marketplace</title>
+
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f6f8;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        /* =========================================
+           CONTAINER
+        ========================================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 450px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.12);
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        h1 {
+
+            text-align: center;
+
+            color: #222;
+
+            margin-bottom: 10px;
+
+            font-size: 28px;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 30px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================
+           FORM GROUP
+        ========================================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #007bff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0, 123, 255, 0.1);
+
+        }
+
+
+        /* =========================================
+           PASSWORD CONTAINER
+        ========================================= */
+
+        .password-container {
+
+            position: relative;
+
+        }
+
+
+        .password-container input {
+
+            padding-right: 70px;
+
+        }
+
+
+        .toggle-password {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #007bff;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================================
+           PASSWORD RULES
+        ========================================= */
+
+        .password-rules {
+
+            margin-top: 8px;
+
+            padding: 10px;
+
+            background: #f8f9fa;
+
+            border-radius: 5px;
+
+            font-size: 12px;
+
+            color: #666;
+
+            line-height: 1.6;
+
+        }
+
+
+        .password-rules ul {
+
+            padding-left: 18px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+        ========================================= */
+
+        .error {
+
+            color: #dc3545;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+            min-height: 16px;
+
+        }
+
+
+        /* =========================================
+           SUCCESS MESSAGE
+        ========================================= */
+
+        .success-message {
+
+            display: none;
+
+            background: #d4edda;
+
+            color: #155724;
+
+            padding: 12px;
+
+            border-radius: 6px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .reset-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #007bff;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .reset-button:hover {
+
+            background: #0056b3;
+
+        }
+
+
+        .reset-button:disabled {
+
+            background: #999;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* =========================================
+           LOGIN LINK
+        ========================================= */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 14px;
+
+        }
+
+
+        .login-link a {
+
+            color: #007bff;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .login-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 500px) {
+
+            .container {
+
+                padding: 25px 20px;
+
+            }
+
+            h1 {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <h1>Reset Password</h1>
+
+        <p class="subtitle">
+
+            Create a strong new password for your
+            Campus Marketplace account.
+
+        </p>
+
+
+        <!-- =====================================
+             SUCCESS MESSAGE
+        ====================================== -->
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+        </div>
+
+
+        <!-- =====================================
+             RESET PASSWORD FORM
+        ====================================== -->
+
+        <form id="resetPasswordForm">
+
+
+            <!-- NEW PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="newPassword">
+
+                    New Password *
+
+                </label>
+
+
+                <div class="password-container">
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Enter new password"
+                        maxlength="30"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('newPassword', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+
+                <div class="password-rules">
+
+                    Password must contain:
+
+                    <ul>
+
+                        <li>8 to 30 characters</li>
+
+                        <li>At least one uppercase letter</li>
+
+                        <li>At least one lowercase letter</li>
+
+                        <li>At least one number</li>
+
+                        <li>At least one special character</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div
+                    class="error"
+                    id="newPasswordError"
+                >
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+
+                    Confirm New Password *
+
+                </label>
+
+
+                <div class="password-container">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm new password"
+                        maxlength="30"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('confirmPassword', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="error"
+                    id="confirmPasswordError"
+                >
+                </div>
+
+            </div>
+
+
+            <!-- RESET BUTTON -->
+
+            <button
+                type="submit"
+                class="reset-button"
+                id="resetButton"
+            >
+
+                Reset Password
+
+            </button>
+
+
+        </form>
+
+
+        <!-- =====================================
+             LOGIN LINK
+        ====================================== -->
+
+        <div class="login-link">
+
+            Remember your password?
+
+            <a href="login.html">
+
+                Back to Login
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+
+        // =========================================
+        // SHOW / HIDE PASSWORD
+        // =========================================
+
+        function togglePassword(inputId, button) {
+
+            const passwordInput =
+                document.getElementById(inputId);
+
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                button.textContent = "Hide";
+
+            } else {
+
+                passwordInput.type = "password";
+
+                button.textContent = "Show";
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // RESET PASSWORD FORM
+        // =========================================
+
+        const resetPasswordForm =
+            document.getElementById(
+                "resetPasswordForm"
+            );
+
+
+        resetPasswordForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                // =====================================
+                // CLEAR PREVIOUS ERRORS
+                // =====================================
+
+                document.getElementById(
+                    "newPasswordError"
+                ).textContent = "";
+
+
+                document.getElementById(
+                    "confirmPasswordError"
+                ).textContent = "";
+
+
+                document.getElementById(
+                    "successMessage"
+                ).style.display = "none";
+
+
+                // =====================================
+                // GET VALUES
+                // =====================================
+
+                const newPassword =
+                    document.getElementById(
+                        "newPassword"
+                    ).value;
+
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    ).value;
+
+
+                let isValid = true;
+
+
+                // =====================================
+                // PASSWORD VALIDATION
+                // =====================================
+
+                const passwordRegex =
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
+
+
+                // EMPTY PASSWORD
+
+                if (!newPassword) {
+
+                    document.getElementById(
+                        "newPasswordError"
+                    ).textContent =
+                        "New password is required.";
+
+                    isValid = false;
+
+                }
+
+
+                // PASSWORD FORMAT
+
+                else if (
+                    !passwordRegex.test(newPassword)
+                ) {
+
+                    document.getElementById(
+                        "newPasswordError"
+                    ).textContent =
+                        "Password must contain uppercase, lowercase, number and special character.";
+
+                    isValid = false;
+
+                }
+
+
+                // =====================================
+                // CONFIRM PASSWORD VALIDATION
+                // =====================================
+
+                if (!confirmPassword) {
+
+                    document.getElementById(
+                        "confirmPasswordError"
+                    ).textContent =
+                        "Please confirm your new password.";
+
+                    isValid = false;
+
+                }
+
+
+                else if (
+                    newPassword !== confirmPassword
+                ) {
+
+                    document.getElementById(
+                        "confirmPasswordError"
+                    ).textContent =
+                        "Passwords do not match.";
+
+                    isValid = false;
+
+                }
+
+
+                // =====================================
+                // STOP IF INVALID
+                // =====================================
+
+                if (!isValid) {
+
+                    return;
+
+                }
+
+
+                // =====================================
+                // SUCCESS
+                // =====================================
+
+                const successMessage =
+                    document.getElementById(
+                        "successMessage"
+                    );
+
+
+                successMessage.textContent =
+                    "Password validation successful!";
+
+
+                successMessage.style.display =
+                    "block";
+
+
+                /*
+                    ====================================
+
+                    SUPABASE PASSWORD UPDATE
+                    WILL BE ADDED HERE NEXT
+
+                    ====================================
+                */
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

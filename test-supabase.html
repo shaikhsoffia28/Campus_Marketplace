@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Connection Test</title>
+</head>
+
+<body>
+
+    <h1>Supabase Connectivity Test</h1>
+
+    <button id="testButton">
+        Test Supabase Connection
+    </button>
+
+    <p id="result">Not tested yet.</p>
+
+    <!-- Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase configuration -->
+    <script src="js/supabase-config.js"></script>
+
+    <script>
+
+        const result =
+            document.getElementById("result");
+
+        document
+            .getElementById("testButton")
+            .addEventListener("click", async function () {
+
+                result.textContent =
+                    "Testing connection...";
+
+                console.log(
+                    "Supabase library:",
+                    window.supabase
+                );
+
+                console.log(
+                    "Supabase client:",
+                    supabaseClient
+                );
+
+                try {
+
+                    // Test Auth connection
+                    const {
+                        data,
+                        error
+                    } = await supabaseClient.auth.getSession();
+
+                    if (error) {
+
+                        console.error(
+                            "Supabase error:",
+                            error
+                        );
+
+                        result.textContent =
+                            "❌ Connection error: " +
+                            error.message;
+
+                        return;
+                    }
+
+                    console.log(
+                        "Supabase response:",
+                        data
+                    );
+
+                    result.textContent =
+                        "✅ Supabase connected successfully!";
+
+                } catch (error) {
+
+                    console.error(
+                        "Connection failed:",
+                        error
+                    );
+
+                    result.textContent =
+                        "❌ Connection failed: " +
+                        error.message;
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>
